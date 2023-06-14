@@ -1,4 +1,5 @@
 ﻿using CinemaTickets.Service.Interface;
+using ClosedXML.Excel;
 using GemBox.Document;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -47,6 +48,8 @@ namespace CinemaTickets.Web.Controllers
 
             this._orderService.PlaceNewOrder(userId);
 
+
+
             return RedirectToAction("OrdersByUser");
         }
 
@@ -81,6 +84,52 @@ namespace CinemaTickets.Web.Controllers
 
 
             return File(stream.ToArray(), new PdfSaveOptions().ContentType, "ExportOrderInvoice.pdf");
+        }
+
+        public IActionResult CreateInvoiceForOrdersWithGenre(string genre)
+        {
+            var orders = this._orderService.GetAllOrdersWithGenre(genre);
+
+            string fileName = "Orders.xlsx";
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+            using (var workBook = new XLWorkbook())
+            {
+                IXLWorksheet worksheet = workBook.Worksheets.Add("All Orders");
+
+                worksheet.Cell(1, 1).Value = "Order Id";
+                worksheet.Cell(1, 2).Value = "Customer Email";
+
+                for (int i = 1; i <= orders.Count(); i++)
+                {
+                    var item = orders[i - 1];
+
+                    worksheet.Cell(i + 1, 1).Value = item.Order.Id.ToString();
+                    worksheet.Cell(i + 1, 2).Value = item.Order.User.Email.ToString();
+
+                    for (int p = 1; p <= item.Order.Tickets.Count(); p++)
+                    {
+                        var screening = item.Order.Tickets.ElementAt(p - 1).MovieScreening;
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("Movie: " + screening.Movie.MovieName +
+                                       ", played at: " + screening.DateAndTime.ToString() +
+                                       ", with ticket price: " + screening.TicketPrice.ToString() +
+                                       "$, and quantity: " + item.Order.Tickets.ElementAt(p - 1).Quantity.ToString());
+                        worksheet.Cell(1, p + 4).Value = "Movie-" + (p);
+                        worksheet.Cell(i + 1, p + 4).Value = sb.ToString();
+                    }
+
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workBook.SaveAs(stream);
+
+                    var content = stream.ToArray();
+
+                    return File(content, contentType, fileName);
+                }
+            }
         }
     }
 }

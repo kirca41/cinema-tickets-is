@@ -1,6 +1,7 @@
 ﻿using CinemaTickets.Domain.DomainModels;
 using CinemaTickets.Domain.DTOs;
 using CinemaTickets.Domain.Identity;
+using ExcelDataReader;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -167,6 +168,85 @@ namespace CinemaTickets.Web.Controllers
             model.Roles = new SelectList(roles, "Name", "Name");
 
             return View(model);
+        }
+
+        public IActionResult ImportUsers()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ImportUsers(IFormFile file)
+        {
+            string pathToUpload = $"{Directory.GetCurrentDirectory()}\\{file.FileName}";
+
+
+            using (FileStream fileStream = System.IO.File.Create(pathToUpload))
+            {
+                file.CopyTo(fileStream);
+
+                fileStream.Flush();
+            }
+
+            List<UserImportDto> users = getUsersFromExcelFile(file.FileName);
+
+            foreach (var user in users)
+            {
+                var userCheck = userManager.FindByEmailAsync(user.Email).Result;
+                if (userCheck == null)
+                {
+                    var u = new CinemaTicketsApplicationUser
+                    {
+                        UserName = user.Email,
+                        NormalizedUserName = user.Email,
+                        Email = user.Email,
+                        EmailConfirmed = true,
+                        PhoneNumberConfirmed = true,
+                        ShoppingCart = new ShoppingCart()
+                    };
+                    var result = userManager.CreateAsync(u, user.Password).Result;
+                    if (result.Succeeded)
+                    {
+                        await roleManager.CreateAsync(new IdentityRole(user.Role));
+                        await userManager.AddToRoleAsync(u, user.Role);
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        private List<UserImportDto> getUsersFromExcelFile(string fileName)
+        {
+
+            string pathToFile = $"{Directory.GetCurrentDirectory()}\\{fileName}";
+
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+            List<UserImportDto> userList = new List<UserImportDto>();
+
+            using (var stream = System.IO.File.Open(pathToFile, FileMode.Open, FileAccess.Read))
+            {
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                {
+                    while (reader.Read())
+                    {
+                        userList.Add(new UserImportDto
+                        {
+                            Email = reader.GetValue(0).ToString(),
+                            Password = reader.GetValue(1).ToString(),
+                            Role = reader.GetValue(2).ToString()
+                        });
+                    }
+                }
+            }
+
+            return userList;
+
         }
 
 

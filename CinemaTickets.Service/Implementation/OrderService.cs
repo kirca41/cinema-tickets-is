@@ -10,14 +10,18 @@ namespace CinemaTickets.Service.Implementation
         private readonly IOrderRepository _orderRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRepository<TicketInOrder> _ticketsInOrderRepository;
+        //private readonly IEmailService _emailService;
 
         public OrderService(IOrderRepository orderRepository,
             IUserRepository _userRepository,
-            IRepository<TicketInOrder> ticketsInOrderRepository)
+            IRepository<TicketInOrder> ticketsInOrderRepository
+            //IEmailService emailService
+            )
         {
             this._orderRepository = orderRepository;
             this._userRepository = _userRepository;
             this._ticketsInOrderRepository = ticketsInOrderRepository;
+            // this._emailService = emailService;
         }
 
         private int getTotalTicketPrice(ICollection<TicketInOrder> Tickets)
@@ -94,6 +98,18 @@ namespace CinemaTickets.Service.Implementation
 
             user.ShoppingCart.TicketsInShoppingCart.Clear();
             this._userRepository.Update(user);
+
+            //this._emailService.Send(user.Email, "Your order has been successfully placed!", "<h1>We have received your order and we will begin to process it shortly. Thank you!</h1>");
+        }
+
+        public List<OrderDto> GetAllOrdersWithGenre(string genre)
+        {
+            return this._orderRepository.GetAllOrdersWithGenre(genre)
+                .Select(z => new OrderDto
+                {
+                    Order = z,
+                    TotalPrice = this.getTotalTicketPrice(z.Tickets)
+                }).ToList(); ;
         }
     }
 }

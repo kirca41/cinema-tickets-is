@@ -16,5 +16,7 @@ namespace CinemaTickets.Repository.Interface
         void PlaceOrder(Order entity);
 
         List<Order> GetAllOrdersByUser(string userId);
+
+        List<Order> GetAllOrdersWithGenre(string genre);
     }
 }

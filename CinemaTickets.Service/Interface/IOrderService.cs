@@ -11,5 +11,6 @@ namespace CinemaTickets.Service.Interface
         void PlaceNewOrder(string userId);
 
         List<OrderDto> GetAllOrdersByUser(string userId);
+        List<OrderDto> GetAllOrdersWithGenre(string genre);
     }
 }

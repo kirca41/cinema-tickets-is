@@ -35,6 +35,17 @@ namespace CinemaTickets.Repository.Implementation
                 .ToListAsync().Result;
         }
 
+        public List<Order> GetAllOrdersWithGenre(string genre)
+        {
+            return this.entities
+                .Include(z => z.User)
+                .Include(z => z.Tickets)
+                .ThenInclude(z => z.MovieScreening)
+                .ThenInclude(z => z.Movie)
+                .Where(z => z.Tickets.Any(y => y.MovieScreening.Movie.Genre.Equals(genre)))
+                .ToListAsync().Result;
+        }
+
         public Order GetOrderDetails(Guid id)
         {
             return this.entities
