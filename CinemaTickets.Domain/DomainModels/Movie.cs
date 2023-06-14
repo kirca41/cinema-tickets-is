@@ -11,5 +11,6 @@ namespace CinemaTickets.Domain.DomainModels
         [Required]
         public string MovieDescription { get; set; }
 
+        public string Genre { get; set; }
     }
 }

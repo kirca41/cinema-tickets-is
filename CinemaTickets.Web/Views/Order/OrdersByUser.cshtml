@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CinemaTickets.Domain.DTOs.OrderDto>
+
+<h1>Orders by: @User.Identity.ToString()</h1>
+
+<div class="container" >
+
+    <div class="m-5">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Order Id</th>
+              <th scope="col">Movie Names</th>
+              <th scope="col">Screening times</th>
+              <th scope="col">Ordered On</th>
+              <th scope="col">Total Price</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+                @for(int i = 0; i < Model.Count(); i++)
+                {
+                    var item = Model.ElementAt(i);
+                    <tr>
+                      <th scope="row">@(i+1)</th>
+                      <td>@item.Order.Id</td>
+                      <td>
+                        <ul class="list-unstyled">
+                        @foreach(var ticket in item.Order.Tickets)
+                        {
+                            <li>@ticket.MovieScreening.Movie.MovieName</li>        
+                        }
+                        </ul>
+                      </td>
+                      <td>
+                        <ul class="list-unstyled">
+                        @foreach(var ticket in item.Order.Tickets)
+                        {
+                            <li>@ticket.MovieScreening.DateAndTime</li>        
+                        }
+                        </ul>
+                      </td>
+                      <td>@item.Order.Timestamp</td>
+                      <td>@item.TotalPrice</td>
+                    </tr>
+                }
+          </tbody>
+
+    </div>
+</div>

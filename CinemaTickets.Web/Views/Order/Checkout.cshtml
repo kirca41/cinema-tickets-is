@@ -1,0 +1,23 @@
+﻿@model CinemaTickets.Domain.DTOs.ShoppingCartDto
+
+<form asp-action="PlaceOrder">
+    <div class="form-group">
+      <label for="cardHolder" class="control-label">Card Holder</label>
+      <input id="cardHolder" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="cardNumber" class="control-label">Card Number</label>
+      <input id="cardNumber" class="form-control" placeholder="xxxx xxxx xxxx xxxx" />
+    </div>
+    <div class="form-group">
+      <label for="CVV" class="control-label">CVV</label>
+      <input id="CVV" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="validUntil" class="control-label">Valid until:</label>
+      <input id="validUntil" class="form-control" placeholder="MM/YY" />
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

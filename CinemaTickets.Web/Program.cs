@@ -22,10 +22,12 @@ builder.Services.AddDefaultIdentity<CinemaTicketsApplicationUser>(options => opt
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IMovieScreeningRepository), typeof(MovieScreeningRepository));
+builder.Services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
 
 builder.Services.AddTransient<IMovieService, MovieService>();
 builder.Services.AddTransient<IMovieScreeningService, MovieScreeningService>();
 builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 builder.Services.AddControllersWithViews();
 

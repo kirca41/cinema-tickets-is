@@ -34,11 +34,17 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="ShoppingCart" asp-action="Index">Cart</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Order" asp-action="OrdersByUser">Orders</a>
+                            </li>
                         }
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Account" asp-action="AddUserToRole">Add User To Role</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Order" asp-action="Index">All Orders</a>
                             </li>
                         }
                     </ul>

@@ -4,6 +4,7 @@ using CinemaTickets.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaTickets.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230614161746_AddedOrderModels")]
+    partial class AddedOrderModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,25 +72,6 @@ namespace CinemaTickets.Repository.Migrations
                     b.ToTable("MovieScreenings");
                 });
 
-            modelBuilder.Entity("CinemaTickets.Domain.DomainModels.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("CinemaTickets.Domain.DomainModels.ShoppingCart", b =>
                 {
                     b.Property<Guid>("Id")
@@ -105,30 +88,6 @@ namespace CinemaTickets.Repository.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("ShoppingCart");
-                });
-
-            modelBuilder.Entity("CinemaTickets.Domain.DomainModels.TicketInOrder", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MovieScreeningId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieScreeningId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("TicketsInOrder");
                 });
 
             modelBuilder.Entity("CinemaTickets.Domain.DomainModels.TicketInShoppingCart", b =>
@@ -377,15 +336,6 @@ namespace CinemaTickets.Repository.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("CinemaTickets.Domain.DomainModels.Order", b =>
-                {
-                    b.HasOne("CinemaTickets.Domain.Identity.CinemaTicketsApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CinemaTickets.Domain.DomainModels.ShoppingCart", b =>
                 {
                     b.HasOne("CinemaTickets.Domain.Identity.CinemaTicketsApplicationUser", "User")
@@ -393,25 +343,6 @@ namespace CinemaTickets.Repository.Migrations
                         .HasForeignKey("CinemaTickets.Domain.DomainModels.ShoppingCart", "UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CinemaTickets.Domain.DomainModels.TicketInOrder", b =>
-                {
-                    b.HasOne("CinemaTickets.Domain.DomainModels.MovieScreening", "MovieScreening")
-                        .WithMany()
-                        .HasForeignKey("MovieScreeningId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CinemaTickets.Domain.DomainModels.Order", "Order")
-                        .WithMany("Tickets")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MovieScreening");
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("CinemaTickets.Domain.DomainModels.TicketInShoppingCart", b =>
@@ -482,11 +413,6 @@ namespace CinemaTickets.Repository.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CinemaTickets.Domain.DomainModels.Order", b =>
-                {
-                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("CinemaTickets.Domain.DomainModels.ShoppingCart", b =>

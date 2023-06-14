@@ -14,5 +14,7 @@ namespace CinemaTickets.Repository
 
         public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<MovieScreening> MovieScreenings { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<TicketInOrder> TicketsInOrder { get; set; }
     }
 }
