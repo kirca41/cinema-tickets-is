@@ -24,6 +24,14 @@ namespace CinemaTickets.Web.Controllers
             return View(applicationDbContext);
         }
 
+        [HttpPost]
+        public IActionResult Index(DateTime dateTime)
+        {
+            var applicationDbContext = this._movieScreeningService.GetMovieScreeningsBefore(dateTime);
+            return View(applicationDbContext);
+        }
+
+
         // GET: MovieScreenings/Details/5
         public IActionResult Details(Guid? id)
         {

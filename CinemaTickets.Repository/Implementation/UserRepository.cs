@@ -29,8 +29,9 @@ namespace CinemaTickets.Repository.Implementation
         {
             return entities
                 .Include(z => z.ShoppingCart)
-                // .Include("UserCart.ProductsInShoppingCart")
-                // .Include("UserCart.ProductsInShoppingCart.Product")
+                .Include("ShoppingCart.TicketsInShoppingCart")
+                .Include("ShoppingCart.TicketsInShoppingCart.MovieScreening")
+                .Include("ShoppingCart.TicketsInShoppingCart.MovieScreening.Movie")
                 .SingleOrDefault(s => s.Id == id);
         }
         public void Insert(CinemaTicketsApplicationUser entity)

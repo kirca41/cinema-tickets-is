@@ -32,7 +32,7 @@ namespace CinemaTickets.Repository.Implementation
 
         public MovieScreening Get(Guid? id)
         {
-            return entities.SingleOrDefault(s => s.Id == id);
+            return entities.Include(m => m.Movie).SingleOrDefault(s => s.Id == id);
         }
 
         public IEnumerable<MovieScreening> GetAll()
@@ -61,6 +61,15 @@ namespace CinemaTickets.Repository.Implementation
             }
             entities.Update(entity);
             context.SaveChanges();
+        }
+
+        public IEnumerable<MovieScreening> GetBefore(DateTime dateTime)
+        {
+            return this.entities
+                .Where(m => m.DateAndTime <= dateTime)
+                .Include(m => m.Movie)                
+                .ToListAsync()
+                .Result;
         }
     }
 }

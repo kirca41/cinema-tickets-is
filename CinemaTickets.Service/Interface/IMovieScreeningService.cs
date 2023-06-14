@@ -20,5 +20,7 @@ namespace CinemaTickets.Service.Interface
         void DeleteMovieScreening(MovieScreening movieScreening);
 
         bool MovieScreeningExists(Guid id);
+
+        List<MovieScreening> GetMovieScreeningsBefore(DateTime dateTime);
     }
 }

@@ -14,5 +14,7 @@ namespace CinemaTickets.Repository.Interface
         void Insert(MovieScreening entity);
         void Update(MovieScreening entity);
         void Delete(MovieScreening entity);
+
+        IEnumerable<MovieScreening> GetBefore(DateTime dateTime);
     }
 }

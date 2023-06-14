@@ -25,6 +25,7 @@ builder.Services.AddScoped(typeof(IMovieScreeningRepository), typeof(MovieScreen
 
 builder.Services.AddTransient<IMovieService, MovieService>();
 builder.Services.AddTransient<IMovieScreeningService, MovieScreeningService>();
+builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
 
 builder.Services.AddControllersWithViews();
 

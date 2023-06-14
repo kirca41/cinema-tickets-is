@@ -1,0 +1,28 @@
+﻿@model CinemaTickets.Domain.DTOs.AddToShoppingCartDto
+
+@{
+    ViewData["Title"] = "Add To Shopping Cart";
+}
+
+<h1>Add Selected Product to Shopping Cart</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4 m-auto">
+        <form asp-action="AddItemToCart" method="POST" >
+            <input type="hidden" asp-for="@Model.MovieScreeningId" />
+            <div class="form-group">
+                <label asp-for="@Model.MovieScreening.Movie.MovieName"></label>
+                <input disabled asp-for="@Model.MovieScreening.Movie.MovieName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Quantity"></label>
+                <input asp-for="@Model.Quantity" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-success" value="Add" type="submit" />
+            </div>
+        </form>
+    </div>
+</div>

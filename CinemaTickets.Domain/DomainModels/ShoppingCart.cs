@@ -6,5 +6,7 @@ namespace CinemaTickets.Domain.DomainModels
     {
         public string UserId { get; set; }
         public CinemaTicketsApplicationUser User { get; set; }
+        public virtual ICollection<TicketInShoppingCart> TicketsInShoppingCart { get; set; }
+
     }
 }

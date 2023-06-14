@@ -39,6 +39,11 @@ namespace CinemaTickets.Service.Implementation
             return this._movieScreeningRepository.Get(id);
         }
 
+        public List<MovieScreening> GetMovieScreeningsBefore(DateTime dateTime)
+        {
+            return this._movieScreeningRepository.GetBefore(dateTime).ToList();
+        }
+
         public bool MovieScreeningExists(Guid id)
         {
             return this._movieScreeningRepository.Get(id) != null;
