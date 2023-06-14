@@ -1,4 +1,4 @@
-﻿using CinemaTickets.Web.Models;
+﻿using CinemaTickets.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

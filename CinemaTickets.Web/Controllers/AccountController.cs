@@ -1,5 +1,6 @@
-﻿using CinemaTickets.Web.Models.DTOs;
-using CinemaTickets.Web.Models.Identity;
+﻿using CinemaTickets.Domain.DomainModels;
+using CinemaTickets.Domain.DTOs;
+using CinemaTickets.Domain.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -46,13 +47,13 @@ namespace CinemaTickets.Web.Controllers
                         PhoneNumber = request.PhoneNumber,
                         EmailConfirmed = true,
                         PhoneNumberConfirmed = true,
-                        ShoppingCart = new Models.DomainModels.ShoppingCart()
+                        ShoppingCart = new ShoppingCart()
                     };
                     var result = await userManager.CreateAsync(user, request.Password);
                     if (result.Succeeded)
                     {
-                        await roleManager.CreateAsync(new IdentityRole("Standard"));
-                        await userManager.AddToRoleAsync(user, "Standard");
+                        await roleManager.CreateAsync(new IdentityRole("Admin"));
+                        await userManager.AddToRoleAsync(user, "Admin");
                         return RedirectToAction("Login");
                     }
                     else

@@ -1,0 +1,12 @@
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\bin\Debug\net6.0\CinemaTickets.Domain.deps.json
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\bin\Debug\net6.0\CinemaTickets.Domain.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\bin\Debug\net6.0\CinemaTickets.Domain.pdb
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\obj\Debug\net6.0\CinemaTickets.Domain.csproj.AssemblyReference.cache
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\obj\Debug\net6.0\CinemaTickets.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\obj\Debug\net6.0\CinemaTickets.Domain.AssemblyInfoInputs.cache
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\obj\Debug\net6.0\CinemaTickets.Domain.AssemblyInfo.cs
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\obj\Debug\net6.0\CinemaTickets.Domain.csproj.CoreCompileInputs.cache
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\obj\Debug\net6.0\CinemaTickets.Domain.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\obj\Debug\net6.0\refint\CinemaTickets.Domain.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\obj\Debug\net6.0\CinemaTickets.Domain.pdb
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Domain\obj\Debug\net6.0\ref\CinemaTickets.Domain.dll

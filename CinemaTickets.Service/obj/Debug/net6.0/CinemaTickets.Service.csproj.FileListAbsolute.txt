@@ -1,0 +1,17 @@
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\bin\Debug\net6.0\CinemaTickets.Service.deps.json
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\bin\Debug\net6.0\CinemaTickets.Service.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\bin\Debug\net6.0\CinemaTickets.Service.pdb
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\bin\Debug\net6.0\CinemaTickets.Domain.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\bin\Debug\net6.0\CinemaTickets.Repository.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\bin\Debug\net6.0\CinemaTickets.Domain.pdb
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\bin\Debug\net6.0\CinemaTickets.Repository.pdb
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\CinemaTickets.Service.csproj.AssemblyReference.cache
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\CinemaTickets.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\CinemaTickets.Service.AssemblyInfoInputs.cache
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\CinemaTickets.Service.AssemblyInfo.cs
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\CinemaTickets.Service.csproj.CoreCompileInputs.cache
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\CinemaTickets.Service.csproj.CopyComplete
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\CinemaTickets.Service.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\refint\CinemaTickets.Service.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\CinemaTickets.Service.pdb
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Service\obj\Debug\net6.0\ref\CinemaTickets.Service.dll

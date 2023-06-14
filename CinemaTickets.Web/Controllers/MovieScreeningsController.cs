@@ -1,42 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CinemaTickets.Web.Data;
-using CinemaTickets.Web.Models.DomainModels;
+using CinemaTickets.Service.Interface;
+using CinemaTickets.Domain.DomainModels;
 
 namespace CinemaTickets.Web.Controllers
 {
     public class MovieScreeningsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public MovieScreeningsController(ApplicationDbContext context)
+        private readonly IMovieScreeningService _movieScreeningService;
+        private readonly IMovieService _movieService;
+        public MovieScreeningsController(IMovieScreeningService movieScreeningService,
+            IMovieService movieService)
         {
-            _context = context;
+            this._movieScreeningService = movieScreeningService;
+            this._movieService = movieService;
         }
 
         // GET: MovieScreenings
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _context.MovieScreenings.Include(m => m.Movie);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = this._movieScreeningService.GetAllMovieScreenings();
+            return View(applicationDbContext);
         }
 
         // GET: MovieScreenings/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public IActionResult Details(Guid? id)
         {
-            if (id == null || _context.MovieScreenings == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var movieScreening = await _context.MovieScreenings
-                .Include(m => m.Movie)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var movieScreening = this._movieScreeningService.GetMovieScreeningById(id);
             if (movieScreening == null)
             {
                 return NotFound();
@@ -48,7 +44,7 @@ namespace CinemaTickets.Web.Controllers
         // GET: MovieScreenings/Create
         public IActionResult Create()
         {
-            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "MovieName");
+            ViewData["MovieId"] = new SelectList(this._movieService.GetAllMovies(), "Id", "MovieName");
             return View();
         }
 
@@ -57,33 +53,31 @@ namespace CinemaTickets.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovieId,DateAndTime,TicketPrice,Id")] MovieScreening movieScreening)
+        public IActionResult Create([Bind("MovieId,DateAndTime,TicketPrice,Id")] MovieScreening movieScreening)
         {
             if (ModelState.IsValid)
             {
-                movieScreening.Id = Guid.NewGuid();
-                _context.Add(movieScreening);
-                await _context.SaveChangesAsync();
+                this._movieScreeningService.CreateNewMovieScreening(movieScreening);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "MovieName", movieScreening.MovieId);
+            ViewData["MovieId"] = new SelectList(this._movieService.GetAllMovies(), "Id", "MovieName", movieScreening.MovieId);
             return View(movieScreening);
         }
 
         // GET: MovieScreenings/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public IActionResult Edit(Guid? id)
         {
-            if (id == null || _context.MovieScreenings == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var movieScreening = await _context.MovieScreenings.FindAsync(id);
+            var movieScreening = this._movieScreeningService.GetMovieScreeningById(id);
             if (movieScreening == null)
             {
                 return NotFound();
             }
-            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "MovieDescription", movieScreening.MovieId);
+            ViewData["MovieId"] = new SelectList(this._movieService.GetAllMovies(), "Id", "MovieDescription", movieScreening.MovieId);
             return View(movieScreening);
         }
 
@@ -92,7 +86,7 @@ namespace CinemaTickets.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("MovieId,DateAndTime,TicketPrice,Id")] MovieScreening movieScreening)
+        public IActionResult Edit(Guid id, [Bind("MovieId,DateAndTime,TicketPrice,Id")] MovieScreening movieScreening)
         {
             if (id != movieScreening.Id)
             {
@@ -103,8 +97,7 @@ namespace CinemaTickets.Web.Controllers
             {
                 try
                 {
-                    _context.Update(movieScreening);
-                    await _context.SaveChangesAsync();
+                    this._movieScreeningService.UpdateExistingMovieScreening(movieScreening);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,21 +112,19 @@ namespace CinemaTickets.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MovieId"] = new SelectList(_context.Movies, "Id", "MovieDescription", movieScreening.MovieId);
+            ViewData["MovieId"] = new SelectList(this._movieService.GetAllMovies(), "Id", "MovieDescription", movieScreening.MovieId);
             return View(movieScreening);
         }
 
         // GET: MovieScreenings/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public IActionResult Delete(Guid? id)
         {
-            if (id == null || _context.MovieScreenings == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var movieScreening = await _context.MovieScreenings
-                .Include(m => m.Movie)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var movieScreening = this._movieScreeningService.GetMovieScreeningById(id);
             if (movieScreening == null)
             {
                 return NotFound();
@@ -145,25 +136,20 @@ namespace CinemaTickets.Web.Controllers
         // POST: MovieScreenings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public IActionResult DeleteConfirmed(Guid id)
         {
-            if (_context.MovieScreenings == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.MovieScreenings'  is null.");
-            }
-            var movieScreening = await _context.MovieScreenings.FindAsync(id);
+            var movieScreening = this._movieScreeningService.GetMovieScreeningById(id);
             if (movieScreening != null)
             {
-                _context.MovieScreenings.Remove(movieScreening);
+                this._movieScreeningService.DeleteMovieScreening(movieScreening);
             }
             
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MovieScreeningExists(Guid id)
         {
-          return (_context.MovieScreenings?.Any(e => e.Id == id)).GetValueOrDefault();
+            return this._movieScreeningService.MovieScreeningExists(id);
         }
     }
 }

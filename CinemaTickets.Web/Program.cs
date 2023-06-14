@@ -1,5 +1,9 @@
-using CinemaTickets.Web.Data;
-using CinemaTickets.Web.Models.Identity;
+using CinemaTickets.Domain.Identity;
+using CinemaTickets.Repository;
+using CinemaTickets.Repository.Implementation;
+using CinemaTickets.Repository.Interface;
+using CinemaTickets.Service.Implementation;
+using CinemaTickets.Service.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +18,14 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<CinemaTicketsApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+builder.Services.AddScoped(typeof(IMovieScreeningRepository), typeof(MovieScreeningRepository));
+
+builder.Services.AddTransient<IMovieService, MovieService>();
+builder.Services.AddTransient<IMovieScreeningService, MovieScreeningService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
