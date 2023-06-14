@@ -295,3 +295,15 @@ C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\ne
 C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\CinemaTickets.Service.pdb
 C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\CinemaTickets.Domain.pdb
 C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\CinemaTickets.Repository.pdb
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\GemBox.Document.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\HarfBuzzSharp.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\SkiaSharp.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\runtimes\osx\native\libHarfBuzzSharp.dylib
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Data\Kiril\IS_2023\CinemaTickets\CinemaTickets\CinemaTickets.Web\bin\Debug\net6.0\runtimes\win-x86\native\libSkiaSharp.dll

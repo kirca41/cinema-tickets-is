@@ -21,6 +21,7 @@ namespace CinemaTickets.Repository.Implementation
                 .Include(z => z.Tickets)
                 .Include("Tickets.MovieScreening")
                 .Include("Tickets.MovieScreening.Movie")
+                .Include(z => z.User)
                 .ToListAsync().Result;
         }
 
@@ -40,6 +41,7 @@ namespace CinemaTickets.Repository.Implementation
                 .Include(z => z.Tickets)
                 .Include("Tickets.MovieScreening")
                 .Include("Tickets.MovieScreening.Movie")
+                .Include(z => z.User)
                 .SingleOrDefault(z => z.Id.Equals(id));
         }
 

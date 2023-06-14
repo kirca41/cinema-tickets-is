@@ -13,6 +13,8 @@
               <th scope="col">User Id</th>
               <th scope="col">Movie Names</th>
               <th scope="col">Screening times</th>
+              <th scope="col">Ticket prices</th>
+              <th scope="col">Quantities</th>
               <th scope="col">Ordered On</th>
               <th scope="col">Total Price</th>
               <th scope="col"></th>
@@ -39,6 +41,22 @@
                         @foreach(var ticket in item.Order.Tickets)
                         {
                             <li>@ticket.MovieScreening.DateAndTime</li>        
+                        }
+                        </ul>
+                      </td>
+                      <td>
+                        <ul class="list-unstyled">
+                        @foreach(var ticket in item.Order.Tickets)
+                        {
+                            <li>@ticket.MovieScreening.TicketPrice</li>        
+                        }
+                        </ul>
+                      </td>
+                      <td>
+                        <ul class="list-unstyled">
+                        @foreach(var ticket in item.Order.Tickets)
+                        {
+                            <li>@ticket.Quantity</li>        
                         }
                         </ul>
                       </td>

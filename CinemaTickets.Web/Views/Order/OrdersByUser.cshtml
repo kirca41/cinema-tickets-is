@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<CinemaTickets.Domain.DTOs.OrderDto>
 
-<h1>Orders by: @User.Identity.ToString()</h1>
+<h1>Orders by current user:</h1>
 
 <div class="container" >
 
@@ -12,6 +12,8 @@
               <th scope="col">Order Id</th>
               <th scope="col">Movie Names</th>
               <th scope="col">Screening times</th>
+              <th scope="col">Ticket prices</th>
+              <th scope="col">Quantities</th>
               <th scope="col">Ordered On</th>
               <th scope="col">Total Price</th>
               <th scope="col"></th>
@@ -40,8 +42,25 @@
                         }
                         </ul>
                       </td>
+                      <td>
+                        <ul class="list-unstyled">
+                        @foreach(var ticket in item.Order.Tickets)
+                        {
+                            <li>@ticket.MovieScreening.TicketPrice</li>        
+                        }
+                        </ul>
+                      </td>
+                      <td>
+                        <ul class="list-unstyled">
+                        @foreach(var ticket in item.Order.Tickets)
+                        {
+                            <li>@ticket.Quantity</li>        
+                        }
+                        </ul>
+                      </td>
                       <td>@item.Order.Timestamp</td>
                       <td>@item.TotalPrice</td>
+                      <td><a class="btn btn-success" asp-action="CreateInvoiceForOrder" asp-route-orderId="@item.Order.Id">Create Invoice</a></td>
                     </tr>
                 }
           </tbody>
