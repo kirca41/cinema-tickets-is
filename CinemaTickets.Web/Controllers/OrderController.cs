@@ -1,6 +1,7 @@
 ﻿using CinemaTickets.Service.Interface;
 using ClosedXML.Excel;
 using GemBox.Document;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Text;
@@ -21,7 +22,7 @@ namespace CinemaTickets.Web.Controllers
             ComponentInfo.SetLicense("FREE-LIMITED-KEY");
         }
 
-        // Make access only for admin
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View(this._orderService.GetAllOrders());
@@ -86,6 +87,7 @@ namespace CinemaTickets.Web.Controllers
             return File(stream.ToArray(), new PdfSaveOptions().ContentType, "ExportOrderInvoice.pdf");
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateInvoiceForOrdersWithGenre(string genre)
         {
             var orders = this._orderService.GetAllOrdersWithGenre(genre);

@@ -33,8 +33,8 @@ builder.Services.AddTransient<IMovieScreeningService, MovieScreeningService>();
 builder.Services.AddTransient<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 
-//builder.Services.AddScoped<EmailSettings>(es => emailSettings);
-//builder.Services.AddScoped<IEmailService, EmailService>(email => new EmailService(emailSettings));
+builder.Services.AddScoped<EmailSettings>(es => emailSettings);
+builder.Services.AddScoped<IEmailService, EmailService>(email => new EmailService(emailSettings));
 
 builder.Services.AddControllersWithViews();
 

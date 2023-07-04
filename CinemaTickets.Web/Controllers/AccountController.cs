@@ -53,8 +53,8 @@ namespace CinemaTickets.Web.Controllers
                     var result = await userManager.CreateAsync(user, request.Password);
                     if (result.Succeeded)
                     {
-                        await roleManager.CreateAsync(new IdentityRole("Admin"));
-                        await userManager.AddToRoleAsync(user, "Admin");
+                        await roleManager.CreateAsync(new IdentityRole("Standard"));
+                        await userManager.AddToRoleAsync(user, "Standard");
                         return RedirectToAction("Login");
                     }
                     else
@@ -176,6 +176,7 @@ namespace CinemaTickets.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ImportUsers(IFormFile file)
         {
             string pathToUpload = $"{Directory.GetCurrentDirectory()}\\{file.FileName}";
